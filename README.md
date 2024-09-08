@@ -10,5 +10,9 @@ Turn Slot - turns 90 degree CCW
 
 ## DOWNLOAD
 https://drive.google.com/file/d/1BTSFOvAJTU01hxfuJ7YD6vbq9MfxMeau/view?usp=sharing
+1. download through the link above
+2. put the zip inside of %appdata%/lootplot/mods
+3. unzip it
+
 
 if you have any suggestion/feedback, feel free to send them at the forum in UMG's Discord
