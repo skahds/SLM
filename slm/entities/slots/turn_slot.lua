@@ -14,17 +14,11 @@ lp.defineSlot("slm:turn_slot", {
 
         if item.targetShape ~= nil then
 
-            local newCordPair = {name=item.targetShape.name .. " turned 90ccw" ,relativeCoords={}}
-
-            for i, cordPair in ipairs(item.targetShape.relativeCoords) do
-                local x = cordPair[1]
-                local y = cordPair[2]
-                table.insert(newCordPair.relativeCoords, {y, -x})
-            end
-
-            lp.targets.setTargetShape(item, newCordPair)
+            lp.targets.setTargetShape(item, slm.targets.rotate(item.targetShape, -90))
         end
 
         end
+
+
     end
 })

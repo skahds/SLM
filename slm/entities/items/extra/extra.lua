@@ -6,7 +6,7 @@ lp.defineItem("slm:rocket", {
     rarity = lp.rarities.RARE,
 
     pointM = 10,
-    minimumLevelToSpawn = 1,
+    minimumLevelToSpawn = 3,
     baseBuyPrice = 3,
     baseMaxActivations = 20,
     description = loc("{lp_targetColor}Generates points based on total flight amount"),
