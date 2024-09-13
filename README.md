@@ -2,8 +2,8 @@
 ## Skahd's Lootplot Mod, for lootplot!
 
 ### ITEMS
-Rocket - generates point based on how long it has flown
-Pear - creates a Turn Slot in the tile it's placed
+- Rocket : generates point based on how long it has flown
+- Pear : creates a Turn Slot in the tile it's placed
 ### SLOTS
 Turn Slot - turns 90 degree CCW
 
