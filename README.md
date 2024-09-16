@@ -1,15 +1,14 @@
 # SLM
 ## Skahd's Lootplot Mod, for lootplot!
 
-### ITEMS
-- Rocket : generates point based on how long it has flown
-- Pear : creates a Turn Slot in the tile it's placed
-- Glass Flute : triggers items in a King Shape and give it 1 max activation, then destroys itself
-- Torch : destroys the item on top of it, then buffs the items bellow it in a fan shaped area
-### SLOTS
-Turn Slot - turns 90 degree CCW
+## DOWNLOAD (NEW)
+1. download entire zip through code -> download zip
+2. put the zip inside of %appdata%/lootplot/mods and unzip it
+3. go inside the folder
+4. select the slm's mods you want
+5. move them to %appdata%/lootplot/mods
 
-## DOWNLOAD
+## DOWNLOAD (OLD)
 1. go to "releases"
 2. download slm.zip
 3. put the zip inside of %appdata%/lootplot/mods

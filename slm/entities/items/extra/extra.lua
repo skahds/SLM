@@ -82,7 +82,7 @@ lp.defineItem("slm:torch", {
     description = loc("Destroys item directly above it"),
     targetType = "ITEM",
     targetShape = torchShape,
-    targetActivationDescription = loc("{lp_targetColor}If above item gets destroyed, all target's gets +20 point generation and +1 max activation"),
+    targetActivationDescription = loc("{lp_targetColor}If above item gets destroyed, one of the target item gets {c r=0.4 g=0.4}+2{/c} point generation and +1 max activation"),
     targetActivate = function (selfEnt, ppos, targetEnt)
         local selfPpos = lp.getPos(selfEnt)
         if selfPpos then
@@ -90,9 +90,10 @@ lp.defineItem("slm:torch", {
             lp.destroy(lp.posToItem(selfPpos:up(1)))
             
             lp.tryTriggerEntity("PULSE", targetEnt)
-            lp.modifierBuff(targetEnt, "pointsGenerated", 20, selfEnt)
+            lp.modifierBuff(targetEnt, "pointsGenerated", 2, selfEnt)
             lp.modifierBuff(targetEnt, "maxActivations", 1, selfEnt)
         end
         end 
     end
 })
+
