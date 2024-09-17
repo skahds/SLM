@@ -1,5 +1,39 @@
 local loc = localization.localize
 
+-- local function equals(o1, o2, ignore_mt)
+--     if o1 == o2 then return true end
+--     local o1Type = type(o1)
+--     local o2Type = type(o2)
+--     if o1Type ~= o2Type then return false end
+--     if o1Type ~= 'table' then return false end
+
+--     if not ignore_mt then
+--         local mt1 = getmetatable(o1)
+--         if mt1 and mt1.__eq then
+--             --compare using built in method
+--             return o1 == o2
+--         end
+--     end
+
+--     local keySet = {}
+
+--     for key1, value1 in pairs(o1) do
+--         local value2 = o2[key1]
+--         if value2 == nil or equals(value1, value2, ignore_mt) == false then
+--             return false
+--         end
+--         keySet[key1] = true
+--     end
+
+--     for key2, _ in pairs(o2) do
+--         if not keySet[key2] then return false end
+--     end
+--     return true
+-- end
+
+
+
+
 lp.defineItem("slm:rocket", {
     image = "rocket",
     name = loc("Rocket"),
@@ -24,7 +58,7 @@ lp.defineItem("slm:rocket", {
     end
 })
 
---[[
+--
 lp.defineItem("slm:dark_mirror", {
     image = "dark_mirror",
     name = loc("Dark mirror"),
@@ -32,23 +66,27 @@ lp.defineItem("slm:dark_mirror", {
     itemStored = {},
     targetType = "SLOT",
     targetActivationDescription = loc("{lp_targetColor}Stores item inside of it"),
-    targetShape = lp.targets.ABOVE_SHAPE,
+    targetShape = lp.targets.KING_SHAPE,
 
     targetActivate = function (selfEnt, ppos, slotEnt)
         local targetItemEnt = lp.posToItem(ppos)
+        if selfEnt.itemStored ~= nil then
+            if selfEnt.itemStored[ppos.slot] then
+                local success = lp.trySetItem(ppos, selfEnt.itemStored[ppos.slot])
+                if success then
+                    selfEnt.itemStored[ppos.slot] = nil
+                end
+            end
+        end
         if targetItemEnt then
-            table.insert(selfEnt.itemStored, {TargetItemEnt, ppos})
+            local copyEnt = lp.clone(targetItemEnt)
+            local slotIndex = lp.getPos(slotEnt).slot
+            selfEnt.itemStored[slotIndex] = copyEnt
             lp.destroy(targetItemEnt)
-        else
-            -- if selfEnt.itemStored ~= nil then
-            --     for i, item in ipairs(selfEnt.itemStored) do
-            --         lp.trySpawnItem(item[2], item[1],  "team yeah")
-            --     end
-            -- end
         end
     end
 })
-]]
+
 
 lp.defineItem("slm:glass_flute", {
     image = "glass_flute",
