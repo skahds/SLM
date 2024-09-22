@@ -1,12 +1,13 @@
 slm = {
-    debugMode = false
+    debugMode = true
 }
+local lootplot = lp
 
 function slm.debugPrint(str, str2)
     local str2 = str2 or " "
     print("======== SLM DEBUG ========" .. str2)
     print(str)
-    print("===========================")
+    print("======== END DEBUG ========")
 end
 
 umg.on("@playerJoin", function(clientID)
@@ -16,10 +17,8 @@ umg.on("@playerJoin", function(clientID)
 
     if slm.debugMode == true then
     -- lp.forceSpawnSlot(lp.main.getContext():getPlot():getPPos(12,12), server.entities.turn_slot,clientID)
-    lp.forceSpawnItem(lp.main.getContext():getPlot():getPPos(9,8), server.entities.dark_mirror,clientID)
-    lp.forceSpawnItem(lp.main.getContext():getPlot():getPPos(7,7), server.entities.ruby_axe,clientID)
-    lp.forceSpawnItem(lp.main.getContext():getPlot():getPPos(10,8), server.entities.glass_bottle,clientID)
-    lp.forceSpawnItem(lp.main.getContext():getPlot():getPPos(11,8), server.entities.ruby_sword,clientID)
+        lp.forceSpawnItem(lp.main.getContext():getPlot():getPPos(9,7), server.entities.torch,clientID)
+
     end
     
 end)

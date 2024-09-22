@@ -1,0 +1,4 @@
+{
+    "uses": ["lootplot.targets", "lootplot", "lootplot.rarities", "lootplot.main", "lootplot.contents.s0", "lootplot.juice", "slm"],
+    "type": "addon"
+}

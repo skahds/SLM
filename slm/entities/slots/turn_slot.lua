@@ -1,4 +1,5 @@
-local loc = localization.localize
+local loc = localization.newLocalizer()
+local lootplot = lp
 
 lp.defineSlot("slm:turn_slot", {
     image = "turn_slot",

@@ -1,4 +1,0 @@
-{
-    "uses": ["lootplot.targets", "lootplot", "lootplot.rarities", "lootplot.slmp"],
-    "type": "addon"
-}
