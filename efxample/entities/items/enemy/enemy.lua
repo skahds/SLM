@@ -8,10 +8,9 @@ ef.defineEnemy("efxample:slime", {
 
     baseMaxActivations = 1,
     shape = lp.targets.ABOVE_SHAPE,
-    description = loc("Destroys item directly above it"),
     target = {
         type = "ITEM_OR_SLOT",
-        description = loc("destroy"),
+        description = loc("Destroys item/slots"),
         activate = function (selfEnt, ppos, targetEnt)
             lp.destroy(targetEnt)
         end
@@ -26,10 +25,9 @@ ef.defineEnemy("efxample:activator", {
 
     baseMaxActivations = 1,
     shape = lp.targets.KING_SHAPE,
-    description = loc("activates nearby enemy"),
     target = {
         type = "ITEM",
-        description = loc("activate"),
+        description = loc("Activates enemy"),
         activate = function (selfEnt, ppos, targetEnt)
             lp.tryTriggerEntity("ENEMY_PULSE", targetEnt)
         end
