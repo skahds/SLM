@@ -1,5 +1,5 @@
 slm = {
-    debugMode = true
+    debugMode = false
 }
 local lootplot = lp
 
