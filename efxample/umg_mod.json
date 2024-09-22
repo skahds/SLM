@@ -1,0 +1,4 @@
+{
+    "uses": ["lootplot.targets", "lootplot", "lootplot.rarities", "ef"],
+    "type": "addon"
+}
