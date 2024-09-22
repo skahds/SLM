@@ -64,14 +64,10 @@ umg.on("rendering:drawEntity", function (ent)
             particle[1].particles:setPosition(ent.x, ent.y)
             particle[1].x, particle[1].y = ent.x, ent.y
             if particle.extras then
-                if lp.getPos(ent) and lp.posToSlot(lp.getPos(ent)) and lp.posToSlot(lp.getPos(ent)).shopLock == true then
-                    if particle.extras.type == "legendary" or particle.extras.type == "mythic" then
-                        particle[1].particles:start()
-                    end
-                else
-                    if particle.extras.type == "legendary" or particle.extras.type == "mythic" then
-                        particle[1].particles:pause()
-                    end
+                if lp.getPos(ent) and lp.posToSlot(lp.getPos(ent)) and lp.posToSlot(lp.getPos(ent)).shopLock == true
+                and (particle.extras.type == "legendary" or particle.extras.type == "mythic") then
+                    particle[1].particles:start()
+                elseif (particle.extras.type == "legendary" or particle.extras.type == "mythic") then
                     particle[1].particles:pause()
                 end
                 if particle.extras.type == "modifier" then
