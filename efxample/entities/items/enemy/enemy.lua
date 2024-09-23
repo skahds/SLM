@@ -37,7 +37,7 @@ ef.defineEnemy("efxample:activator", {
 })
 
 ef.defineEnemy("efxample:god", {
-    image = "nameless_deity",
+    image = "g",
     name = loc("nameless deity"),
     rarity = lp.rarities.ENEMY,
     ai = ef.ai.nothing,
