@@ -32,6 +32,7 @@ umg.on("lootplot:entityReset", function (ent)
         end)
         -- get every ent in the list
         if entList then
+            shuffleTable(entList)
             for _, item in ipairs(entList) do
                 local doneFind = nil
                 
