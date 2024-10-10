@@ -1,6 +1,7 @@
 local loc = localization.newLocalizer()
 botanicLib = {}
 
+
 function botanicLib.forceSpawnItem(ppos, itemEType, team)
     local itemEnt = itemEType()
     itemEnt.lootplotTeam = team or "?"
@@ -23,10 +24,7 @@ local function isInTable(table, element)
 end
 
 function botanicLib.addBotanicTableForSpawnedItem(ent, oldEnt)
-    local newGrowthTable = oldEnt.botanicGrowth
-    table.remove(newGrowthTable, 1)
-    ent.botanicGrowth = newGrowthTable
-    ent.age = oldEnt.age
+
     -- needs to sync!
     -- the server has the age and botanic growth correctly handled, the client seems to not know about it
 end
