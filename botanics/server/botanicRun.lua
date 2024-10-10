@@ -10,6 +10,13 @@ umg.on("lootplot:entityActivated", function (ent)
                         botanicLib.forceSpawnItem(lp.getPos(itemEnt), newItem, itemEnt.lootplotTeam) 
                         local spawnedItem = lp.posToItem(lp.getPos(ent))
                         lp.rarities.setEntityRarity(spawnedItem, itemEnt.rarity)
+
+                        if itemEnt.botanicKeepGrowth == true then
+                            local newGrowthTable = itemEnt.botanicGrowth
+                            table.remove(newGrowthTable, i)
+                            spawnedItem.botanicGrowth = newGrowthTable
+                            spawnedItem.age = itemEnt.age
+                        end
                     break
                 end
             end

@@ -5,11 +5,16 @@ local botanicStageBasicSeed = {
         requiredAge = 1,
         transformTo = "ruby_axe"
         -- transformTo = "dragonfruit"
+    },
+    {
+        requiredAge = 3,
+        transformTo = "quartz_glove"
     }
 }
 
 lp.defineItem("botanics:basic_seed", {
     botanicGrowth = botanicStageBasicSeed,
+    botanicKeepGrowth = true,
 
     name = "Basic Seed",
     image = "basic_seed",
