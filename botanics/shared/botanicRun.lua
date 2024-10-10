@@ -17,7 +17,7 @@ umg.on("lootplot:entityActivated", function (ent)
                     local newItem = server.entities[botanicTable.transformTo]
                     botanicLib.forceSpawnItem(lp.getPos(itemEnt), newItem, itemEnt.lootplotTeam) 
                 end
-                
+
                 local spawnedItem = lp.posToItem(lp.getPos(ent))
 
                 if itemEnt.botanicKeepGrowth == true then

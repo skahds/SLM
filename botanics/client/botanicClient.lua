@@ -11,7 +11,6 @@ umg.on("lootplot:populateDescription", 50, function(ent, arr)
         else
             arr:add("{c r=0.1 b=0.1 g=1}Transform when grown!")
         end
-        -- arr:add("{c r=0.1 b=0.1 g=0.8}Current Age: " .. ent.age)
+        arr:add("{c r=0.1 b=0.1 g=0.8}Current Age: " .. ent.age)
     end
-
 end)
