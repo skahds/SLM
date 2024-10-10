@@ -2,7 +2,7 @@ local loc = localization.newLocalizer()
 
 local botanicStageBasicSeed = {
     {
-        requiredAge = 1,
+        requiredAge = 2,
         transformTo = "ruby_axe"
         -- transformTo = "dragonfruit"
     },

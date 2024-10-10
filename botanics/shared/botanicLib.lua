@@ -22,7 +22,14 @@ local function isInTable(table, element)
     end
 end
 
-
+function botanicLib.addBotanicTableForSpawnedItem(ent, oldEnt)
+    local newGrowthTable = oldEnt.botanicGrowth
+    table.remove(newGrowthTable, 1)
+    ent.botanicGrowth = newGrowthTable
+    ent.age = oldEnt.age
+    -- needs to sync!
+    -- the server has the age and botanic growth correctly handled, the client seems to not know about it
+end
 
 umg.on("lootplot:entitySpawned", function(ent)
     if lp.isSlotEntity(ent) and isInTable(ent.baseTraits, "lootplot.content.s0:BOTANIC") then
