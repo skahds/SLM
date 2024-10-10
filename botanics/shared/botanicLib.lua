@@ -1,4 +1,17 @@
 local loc = localization.newLocalizer()
+botanicLib = {}
+
+function botanicLib.forceSpawnItem(ppos, itemEType, team)
+    local itemEnt = itemEType()
+    itemEnt.lootplotTeam = team or "?"
+    local prevItem = lp.posToItem(ppos)
+    if prevItem then
+        prevItem:delete()
+    end
+    
+    ppos:set(itemEnt)
+    return nil
+end
 
 local function isInTable(table, element)
     if table == nil then return false end
@@ -22,24 +35,3 @@ umg.on("lootplot:entitySpawned", function(ent)
     end
 end)
 
-umg.on("lootplot:entityActivated", function (ent)
-    if lp.isSlotEntity(ent) and ent.growSpeed then
-        local itemEnt = lp.slotToItem(ent)
-        if itemEnt and itemEnt.botanicGrowth then
-            itemEnt.age = itemEnt.age + ent.growSpeed
-            for i, botanicTable in ipairs(itemEnt.botanicGrowth) do
-                if itemEnt.age > botanicTable.requiredAge then
-
-                    if server then
-                        lp.forceSpawnItem(lp.getPos(itemEnt), server.entities.ruby_axe, itemEnt.lootplotTeam)     
-                        print (server.entities.ruby_axe)
-                    end
-                    
-
-                
-                    break
-                end
-            end
-        end
-    end    
-end)
