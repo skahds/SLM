@@ -1,4 +1,4 @@
 {
-    "uses": ["lootplot.targets", "lootplot", "lootplot.rarities", "lootplot.main", "lootplot.contents.s0", "lootplot.juice"],
+    "uses": ["lootplot.targets", "lootplot", "lootplot.rarities", "lootplot.main", "lootplot.contents.s0", "lootplot.juice", "sync"],
     "type": "addon"
 }

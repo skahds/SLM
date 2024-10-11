@@ -1,43 +1,62 @@
 local loc = localization.newLocalizer()
-botanicLib = {}
+local botanicLib = {}
 
 
-function botanicLib.forceSpawnItem(ppos, itemEType, team)
-    local itemEnt = itemEType()
-    itemEnt.lootplotTeam = team or "?"
-    local prevItem = lp.posToItem(ppos)
-    if prevItem then
-        prevItem:delete()
-    end
+-- function botanicLib.forceSpawnItem(ppos, itemEType, team)
+--     local itemEnt = itemEType()
+--     itemEnt.lootplotTeam = team or "?"
+--     local prevItem = lp.posToItem(ppos)
+--     if prevItem then
+--         prevItem:delete()
+--     end
     
-    ppos:set(itemEnt)
+--     ppos:set(itemEnt)
 
-    return nil
-end
+--     return nil
+-- end
 
-local function isInTable(table, element)
-    if table == nil then return false end
-    for i=1, #table do
-        if element == table[i] then
-            return true
+
+
+
+function botanicLib.tryGrow(itemEnt)
+
+
+    if lp.getPos(itemEnt) then
+        -- the not-shuffled table
+        local botanicTableNS = itemEnt.botanicGrowth
+
+        table.sort(botanicTableNS, function (a, b)
+            return a.requiredAge < b.requiredAge
+        end)
+
+        local botanicTable = botanicTableNS[1]
+    
+        if itemEnt.age >= botanicTable.requiredAge then
+            -- initialize the spawnedItem
+            local spawnedItem = nil
+            if server then
+                local newItem = server.entities[botanicTable.transformTo]
+                spawnedItem = lp.forceSpawnItem(lp.getPos(itemEnt), newItem, itemEnt.lootplotTeam) 
+            end
+
+            
+            if itemEnt.botanicKeepGrowth == true then
+                spawnedItem.botanicKeepGrowth = true
+                local newGrowthTable = itemEnt.botanicGrowth
+                table.remove(newGrowthTable, 1)
+    
+                spawnedItem.botanicGrowth = newGrowthTable
+                spawnedItem.age = itemEnt.age
+    
+    
+                -- need to check if this is server since its serverside only
+                if server then
+                    lp.rarities.setEntityRarity(spawnedItem, itemEnt.rarity)
+                end
+            end
         end
     end
+
 end
 
-function botanicLib.addBotanicTableForSpawnedItem(ent, oldEnt)
-
-    -- needs to sync!
-    -- the server has the age and botanic growth correctly handled, the client seems to not know about it
-end
-
-umg.on("lootplot:entitySpawned", function(ent)
-    if lp.isSlotEntity(ent) and isInTable(ent.baseTraits, "lootplot.content.s0:BOTANIC") then
-        ent.growSpeed = 1
-    end
-    if lp.isItemEntity(ent) and ent.botanicGrowth then
-        if ent.age == nil then
-            ent.age = 0
-        end
-    end
-end)
-
+umg.expose("botanicLib", botanicLib)
