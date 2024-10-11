@@ -11,6 +11,12 @@ local botanicStageBasicSeed = {
 lp.defineItem("botanics:basic_seed", {
     botanicGrowth = botanicStageBasicSeed,
     -- botanicKeepGrowth = false,
+    canGrow = function (ent)
+        local slotEnt = lp.itemToSlot(ent)
+        if slotEnt and slotEnt.growSpeed or lp.hasTrait(slotEnt, "lootplot.content.s0:BOTANIC") then
+            return true
+        end
+    end,
 
     name = "Basic Seed",
     image = "basic_seed",

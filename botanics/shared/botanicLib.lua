@@ -2,26 +2,21 @@ local loc = localization.newLocalizer()
 local botanicLib = {}
 
 
--- function botanicLib.forceSpawnItem(ppos, itemEType, team)
---     local itemEnt = itemEType()
---     itemEnt.lootplotTeam = team or "?"
---     local prevItem = lp.posToItem(ppos)
---     if prevItem then
---         prevItem:delete()
---     end
-    
---     ppos:set(itemEnt)
 
---     return nil
--- end
-
-
-
-
+---check if it an item can grow or not
+---@param itemEnt any
 function botanicLib.tryGrow(itemEnt)
 
+    if itemEnt.botanicGrowth then
 
     if lp.getPos(itemEnt) then
+        -- if the item has a special grow condition
+        if type(itemEnt.canGrow) == "function" then
+            if itemEnt.canGrow(itemEnt) ~= true then
+                return false
+            end
+        end
+
         -- the not-shuffled table
         local botanicTableNS = itemEnt.botanicGrowth
 
@@ -56,7 +51,7 @@ function botanicLib.tryGrow(itemEnt)
             end
         end
     end
-
+    end
 end
 
 umg.expose("botanicLib", botanicLib)
