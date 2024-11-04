@@ -28,7 +28,6 @@ local function makeCoolParticle(ent, extraComponents)
     newEnt.dimension = ent.dimension
     local ps = makeBallPS(COUNT, {rad=extraComponents.rad})
     ps:setColors(unpack(extraComponents.color))
-    ps:setEmissionRate(COUNT*100)
     ps:setBufferSize(1000)
     ps:setParticleLifetime(1)
     newEnt.particles = ps
@@ -69,45 +68,31 @@ umg.on("rendering:drawEntity", function (ent)
             if particle.extras then
                 if particle.extras.type == "doom" then
                     if ent.doomCount then
-                        particle[1].particles:start()
-                    else
-                        particle[1].particles:stop()
+                        particle[1].particles:emit(1)
                     end
                 end
                 if particle.extras.type == "lives" then
                     if ent.lives then
-                        particle[1].particles:start()
-                    else
-                        particle[1].particles:stop()
+                        particle[1].particles:emit(1)
                     end
                 end
 
                 if lp.getPos(ent) and lp.posToSlot(lp.getPos(ent)) and lp.posToSlot(lp.getPos(ent)).shopLock == true
                 and (particle.extras.type == "legendary" or particle.extras.type == "mythic") then
-                    particle[1].particles:start()
-                elseif (particle.extras.type == "legendary" or particle.extras.type == "mythic") then
-                    particle[1].particles:pause()
+                    particle[1].particles:emit(1)
                 end
 
                 if particle.extras.type == "modifier" then
                     if ent.lootplotProperties then
                         if ent.lootplotProperties.multipliers or ent.lootplotProperties.modifier then
-                            particle[1].particles:start()
-                        else
-                            particle[1].particles:pause()
+                            particle[1].particles:emit(1)
                         end
-                    else
-                        particle[1].particles:pause()
                     end
                 end
                 if particle.extras.type == "float" then
-                    if lp.itemToSlot(ent) then
-                        particle[1].particles:pause()
-                    elseif lp.canItemFloat(ent) then
-                        particle[1].particles:start()
+                    if not lp.itemToSlot(ent) then
+                        particle[1].particles:emit(1)
                     end
-                else
-
                 end
             end
         end
