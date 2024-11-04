@@ -11,9 +11,17 @@ function slm.debugPrint(str, str2)
 end
 
 umg.on("@playerJoin", function(clientID)
-    lp.forceSpawnSlot(lp.main.getContext():getPlot():getPPos(5,9), server.entities.shop_slot,clientID)
-    lp.forceSpawnSlot(lp.main.getContext():getPlot():getPPos(6,9), server.entities.shop_slot,clientID)
-    lp.forceSpawnSlot(lp.main.getContext():getPlot():getPPos(7,9), server.entities.shop_slot,clientID)
+
+    local run = lp.main.getRun()
+    if run then
+        local plot = run:getPlot()
+        lp.forceSpawnSlot(plot:getPPos(10,9), server.entities.shop_slot,clientID)
+    else
+        print("wait")
+    end
+
+    -- lp.forceSpawnSlot(lp.main.getContext():getPlot():getPPos(6,9), server.entities.shop_slot,clientID)
+    -- lp.forceSpawnSlot(lp.main.getContext():getPlot():getPPos(7,9), server.entities.shop_slot,clientID)
 
     if slm.debugMode == true then
     -- lp.forceSpawnSlot(lp.main.getContext():getPlot():getPPos(12,12), server.entities.turn_slot,clientID)
@@ -22,6 +30,4 @@ umg.on("@playerJoin", function(clientID)
     end
     
 end)
-
-
 
