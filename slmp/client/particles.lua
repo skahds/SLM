@@ -41,10 +41,13 @@ end
 umg.on("lootplot:entitySpawned", function(ent)
     if lp.isItemEntity(ent) then
         if lp.getPos(ent) then
-            if ent.doomCount then
-            makeCoolParticle(ent, {rad=8, drawDepth = -100, color = {0.7, 0.2, 0.3, 0.4}})
-            makeCoolParticle(ent, {rad=4, drawDepth = -99, color = {0.5, 0.2, 0.8, 0.4}})
-            end
+            makeCoolParticle(ent, {rad=8, drawDepth = -100, color = {0.7, 0.2, 0.3, 0.4}, type="doom"})
+            makeCoolParticle(ent, {rad=4, drawDepth = -99, color = {0.5, 0.2, 0.8, 0.4}, type="doom"})
+
+            makeCoolParticle(ent, {rad=4, drawDepth = -98, color = {223/255, 153/255, 175/255, 0.4}, type="lives"})
+
+            makeCoolParticle(ent, {rad=8, drawDepth = -120, color = {1, 1, 1, 0.5}, type="float"})
+
             makeCoolParticle(ent, {rad=6, drawDepth = -98, color = {236/255, 146/255, 29/255, 0.5}, type= "modifier"})
             makeCoolParticle(ent, {rad=4, drawDepth = -97, color = {249/255, 200/255, 111/255, 0.5}, type= "modifier"})
             if  ent.rarity == lp.rarities.LEGENDARY then
@@ -64,12 +67,28 @@ umg.on("rendering:drawEntity", function (ent)
             particle[1].particles:setPosition(ent.x, ent.y)
             particle[1].x, particle[1].y = ent.x, ent.y
             if particle.extras then
+                if particle.extras.type == "doom" then
+                    if ent.doomCount then
+                        particle[1].particles:start()
+                    else
+                        particle[1].particles:stop()
+                    end
+                end
+                if particle.extras.type == "lives" then
+                    if ent.lives then
+                        particle[1].particles:start()
+                    else
+                        particle[1].particles:stop()
+                    end
+                end
+
                 if lp.getPos(ent) and lp.posToSlot(lp.getPos(ent)) and lp.posToSlot(lp.getPos(ent)).shopLock == true
                 and (particle.extras.type == "legendary" or particle.extras.type == "mythic") then
                     particle[1].particles:start()
                 elseif (particle.extras.type == "legendary" or particle.extras.type == "mythic") then
                     particle[1].particles:pause()
                 end
+
                 if particle.extras.type == "modifier" then
                     if ent.lootplotProperties then
                         if ent.lootplotProperties.multipliers or ent.lootplotProperties.modifier then
@@ -81,7 +100,25 @@ umg.on("rendering:drawEntity", function (ent)
                         particle[1].particles:pause()
                     end
                 end
+                if particle.extras.type == "float" then
+                    if lp.itemToSlot(ent) then
+                        particle[1].particles:pause()
+                    elseif lp.canItemFloat(ent) then
+                        particle[1].particles:start()
+                    end
+                else
+
+                end
             end
         end
     end
 end)
+
+umg.on("lootplot:entityDestroyed", function (ent)
+    if ent.particleList then
+        for i, particle in ipairs(ent.particleList) do
+            particle[1].particles:pause()
+        end
+    end
+end)
+
