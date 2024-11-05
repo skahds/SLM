@@ -63,9 +63,11 @@ lp.defineItem("slm:glass_flute", {
     shape = lp.targets.KING_SHAPE,
     target = {
         type = "ITEM",
-        description = loc("{lp_targetColor}Triggers all surroundding item and giving them +1 max activation"),
+        description = loc("{lp_targetColor}Triggers all surroundding item with PULSE, REROLL and DESTROY and give them +1 max activation"),
         activate = function(selfEnt, ppos, targetEnt)
             lp.tryTriggerEntity("PULSE", targetEnt)
+            lp.tryTriggerEntity("REROLL", targetEnt)
+            lp.tryTriggerEntity("DESTROY", targetEnt)
             lp.modifierBuff(targetEnt, "maxActivations", 1, selfEnt)
         end
     }
