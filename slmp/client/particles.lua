@@ -98,12 +98,3 @@ umg.on("rendering:drawEntity", function (ent)
         end
     end
 end)
-
-umg.on("lootplot:entityDestroyed", function (ent)
-    if ent.particleList then
-        for i, particle in ipairs(ent.particleList) do
-            particle[1].particles:pause()
-        end
-    end
-end)
-
