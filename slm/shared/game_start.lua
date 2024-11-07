@@ -10,14 +10,12 @@ function slm.debugPrint(str, str2)
     print("======== END DEBUG ========")
 end
 
-umg.on("@playerJoin", function(clientID)
+umg.on("lootplot:entityReset", function()
 
     local run = lp.main.getRun()
-    if run then
+    if run and server then
         local plot = run:getPlot()
-        lp.forceSpawnSlot(plot:getPPos(10,9), server.entities.shop_slot,clientID)
-    else
-        print("wait")
+        lp.forceSpawnSlot(plot:getPPos(10,9), server.entities.shop_slot,"enemy")
     end
 
     -- lp.forceSpawnSlot(lp.main.getContext():getPlot():getPPos(6,9), server.entities.shop_slot,clientID)

@@ -4,9 +4,8 @@ local loc = localization.localize
 lp.defineItem("slm:rocket", {
     image = "rocket",
     name = loc("Rocket"),
-    rarity = lp.rarities.COMMON,
-
-    pointM = 10,
+    rarity = lp.rarities.UNCOMMON,
+    basePointsGenerated = 10,
     baseBuyPrice = 3,
     baseMaxActivations = 20,
     description = loc("{lp_targetColor}Generates points based on total flight amount"),
@@ -15,10 +14,10 @@ lp.defineItem("slm:rocket", {
         if lp.posToSlot(ppos:up(1)) then
         lp.swapItems(ppos, ppos:up(1))
         end
-        lp.addPoints(selfEnt, selfEnt.pointM)
-        if selfEnt.pointM < 100 then selfEnt.pointM = selfEnt.pointM + 8
-        elseif selfEnt.pointM < 1000 then selfEnt.pointM = selfEnt.pointM + 1.05 + 10
-        else selfEnt.pointM = selfEnt.pointM * 1.01 end
+        -- lp.addPoints(selfEnt, selfEnt.pointM)
+        if selfEnt.basePointsGenerated < 100 then selfEnt.basePointsGenerated = selfEnt.basePointsGenerated + 8
+        elseif selfEnt.basePointsGenerated < 1000 then selfEnt.basePointsGenerated = selfEnt.basePointsGenerated + 1.05 + 10
+        else selfEnt.basePointsGenerated = selfEnt.basePointsGenerated * 1.01 end
     end
 })
 
@@ -26,7 +25,7 @@ lp.defineItem("slm:rocket", {
 lp.defineItem("slm:dark_mirror", {
     image = "dark_mirror",
     name = loc("Dark mirror"),
-    rarity = lp.rarities.COMMON,
+    rarity = lp.rarities.UNCOMMON,
 
     itemStored = {},
     shape = lp.targets.KING_SHAPE,
