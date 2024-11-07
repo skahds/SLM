@@ -1,5 +1,7 @@
-local ef = {}
-ef.team = "@enemy"
+local ef = {
+    team = "@enemy",
+    enemySpawnChance = 0.1
+}
 ef.ai = {
     attack = "SHAPE_ATTACK_ITEM",
     support = "SHAPE_SUPPORT_ENEMY",
@@ -26,18 +28,9 @@ local DEFAULT_PROPS = {
     "maxActivations"
 }
 
-local function giveCommonComponents(etype)
-    for _, prop in ipairs(DEFAULT_PROPS) do
-        local base = properties.getBase(prop)
-        assert(base,"?")
-        -- ensure base exists:
-        etype[base] = etype[base] or properties.getDefault(prop)
-    end
-end
-
 local strTabTc = typecheck.assert("string", "table")
 
-lp.defineTrigger("ENEMY_PULSE")
+lp.defineTrigger("ENEMY_PULSE", "Enemy Pulse")
 ---Availability: Client and Server
 ---@param name string
 ---@param itemType table<string, any>
