@@ -8,6 +8,17 @@ ef.ai = {
     nothing = "NOTHING"
 }
 
+ef.slotImageBlacklist = {}
+function ef.blackListSlotImage(str)
+    ef.slotImageBlacklist[str] = true
+end
+function ef.isSlotImageBlacklisted(slotEnt)
+    return ef.slotImageBlacklist[slotEnt.image]
+end
+ef.blackListSlotImage("shop_slot")
+
+
+
 local function newRarity(name, rarity_weight, color)
     local cStr = localization.localize("{wavy}{c r=%f g=%f b=%f}%{name}{/c}{/wavy}", {
         name = name
@@ -40,8 +51,8 @@ function ef.defineEnemy(name, itemType)
     itemType.enemy = true
     itemType.layer = "item"
     itemType.baseMaxActivations = 5
-    itemType.basePrice = itemType.basePrice or -1000000
-    itemType.sellPrice = -1000000
+    itemType.basePrice = itemType.basePrice or 0
+    itemType.sellPrice = 0
     itemType.triggers = itemType.triggers or {"PULSE", "ENEMY_PULSE"}
     itemType.hitboxDistance = itemType.hitboxDistance or 8
     itemType.hoverable = true

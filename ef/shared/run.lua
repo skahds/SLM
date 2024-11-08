@@ -3,6 +3,7 @@
 --     local plot = ppos:getPlot()
 
 -- end)
+
 local function shuffleTable(t)
     local size = #t
     if size <= 2 then return end
@@ -44,17 +45,24 @@ umg.on("lootplot:entityReset", function (ent)
                     for _, cordPair in ipairs(relativeTable) do
                         -- get newPos
                         local newPos = itemPos:move(cordPair[1], -cordPair[2])
-                        if lp.posToSlot(newPos) then
-                            local selfCopy = lp.clone(ent)
-
-                            local setsesful = lp.trySetItem(newPos, selfCopy)
-                            if setsesful then
-                                -- destroy self
-                                ent.lives = 0
-                                lp.destroy(ent)
-                                doneFind = true
+                        local newSlot = lp.posToSlot(newPos)
+                        if newSlot then
+                            if ef.isSlotImageBlacklisted(newSlot) then
                                 break
                             end
+                            if lp.swapItems(lp.getPos(ent), newPos) then
+                                doneFind = true
+                            end
+                            -- local selfCopy = lp.clone(ent)
+
+                            -- local setsesful = lp.trySetItem(newPos, selfCopy)
+                            -- if setsesful then
+                            --     -- destroy self
+                            --     ent.lives = 0
+                            --     lp.destroy(ent)
+                            --     doneFind = true
+                            --     break
+                            -- end
                             
                         end
                         -- check if done
