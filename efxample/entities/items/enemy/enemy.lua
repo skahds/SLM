@@ -14,7 +14,7 @@ ef.defineEnemy("efxample:slime", {
         type = "ITEM",
         description = loc("Destroys items"),
         activate = function (selfEnt, ppos, targetEnt)
-            -- lp.destroy(targetEnt)
+            lp.destroy(targetEnt)
         end
     }
 })

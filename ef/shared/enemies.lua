@@ -1,6 +1,6 @@
 local ef = {
     team = "@enemy",
-    enemySpawnChance = 0.1
+    enemySpawnChance = 0.05
 }
 ef.ai = {
     attack = "SHAPE_ATTACK_ITEM",

@@ -21,7 +21,7 @@ umg.on("lootplot:entityReset", function (ent)
                 ent.infectedCount = nil
             end
         end
-        if ent.infectedCount == nil and ef.isSlotImageBlacklisted(ent) ~= true and math.random() < ef.enemySpawnChance then
+        if ent.infectedCount == nil and ef.isSlotImageBlacklisted(ent) ~= true and ent.baseCanSlotPropagate and math.random() < ef.enemySpawnChance then
             ent.infectedCount = 2
         end
     end
