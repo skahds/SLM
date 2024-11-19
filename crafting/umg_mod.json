@@ -1,0 +1,8 @@
+{
+    "uses": [
+        "lootplot.targets", "lootplot", "lootplot.rarities", 
+        "lootplot.levels", "lootplot.tiers", "lootplot.metaprogression",
+        "lootplot.worldgen", "sound", "lootplot.s0.content", "firstActivate"
+    ],
+    "type": "addon"
+}
