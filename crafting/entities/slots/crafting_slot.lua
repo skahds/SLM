@@ -64,8 +64,8 @@ lp.defineSlot("crafting:crafting_heart_slot", {
                         sacrificedItem = sacrificedItem - amount
                     end
                 end
+                break
             end
-            break
         end
     end
 })
