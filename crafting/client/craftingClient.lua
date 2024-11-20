@@ -15,7 +15,7 @@ umg.on("lootplot:populateDescription", 60, function(ent, arr)
             for ingredient, amount in pairs(recipes.ingredient) do
                 ingredientString = ingredientString .. ingredient .. " (x" .. amount .. "), "
             end
-            arr:add("{c r=0.96 b=0 g=0.5}" .. ingredientString .. "\nCraftes into : " .. recipes.clientResult)
+            arr:add("{c r=0.96 b=0 g=0.5}" .. ingredientString .. "\nCrafts into : " .. recipes.clientResult)
         end
     end
 end)
