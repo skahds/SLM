@@ -90,3 +90,8 @@ lp.defineSlot("inscryption:blank_wood", {
     name= "Nothing",
     image="blank_wood"
 })
+
+lp.defineSlot("inscryption:empty_map", {
+    name= "Map",
+    image="empty_map"
+})
