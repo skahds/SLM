@@ -2,8 +2,10 @@ local cards = {}
 
 
 local function defineBeast(id, details)
+    details.beast = true
+
     details.name = details.name or "NO NAME"
-    details.image = details.image or "squirrel"
+    details.image = details.image or "place_holder_card"
     details.rarity = lp.rarities.UNIQUE
     details.description = details.description or "NO DESCRIPTION"
     details.attack = details.attack or 0
@@ -20,6 +22,14 @@ end
 defineBeast("squirrel", {
     image="squirrel",
     name ="Squirrel"
+})
+
+defineBeast("stoat", {
+    name = "Stoat",
+    description = "We gotta get outa this plot!",
+    attack = 1,
+    health = 3,
+    sacrificeRequired = 1
 })
 
 for id, card in pairs(cards) do
