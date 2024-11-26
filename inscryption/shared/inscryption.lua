@@ -3,9 +3,21 @@ local inscryption = {
     beasts = {},
     state="map",
     
-    deck = {"stoat", "stoat"}
+    deck = {"stoat", "stoat"},
+    sacrificing_choices = {}
 }
 
+
+local function defineInteger(compName)
+    components.defineComponent(compName)
+    sync.autoSyncComponent(compName, {
+        type = "number",
+        lerp = false,
+    })
+end
+
+defineInteger("sacrificeRequired")
+defineInteger("blood")
 
 
 

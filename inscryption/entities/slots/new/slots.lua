@@ -22,8 +22,10 @@ lp.defineSlot("inscryption:player_attack_button", {
         local ppos = lp.getPos(ent)
         local itemEnt = lp.slotToItem(inscryption.play_card_slot)
         if ppos and itemEnt then
-            local newSlot = lp.forceSpawnSlot(ppos, server.entities.player_attack, ent.lootplotTeam)
-            lp.swapItems(lp.getPos(inscryption.play_card_slot), ppos)
+            if itemEnt.sacrificeRequired <= 0 or itemEnt.lootplotTeam == "sacrifice_complete" then
+                local newSlot = lp.forceSpawnSlot(ppos, server.entities.player_attack, ent.lootplotTeam)
+                lp.swapItems(lp.getPos(inscryption.play_card_slot), ppos)
+            end
         end
     end,
 })
@@ -80,8 +82,38 @@ lp.defineSlot("inscryption:sacrifice_button", {
     buttonSlot = true,
     onActivate = function(ent)
         local ppos = lp.getPos(ent)
-        if ppos then
+        local resultItem = lp.slotToItem(inscryption.play_card_slot)
+        if ppos and resultItem and resultItem.sacrificeRequired > 0 then
+            if lp.posToItem(ppos:up(1)) then
+                local itemEnt = lp.posToItem(ppos:up(1))
+                if itemEnt.isBeingSacrificed == nil and itemEnt.blood > 0 then
+                    itemEnt.isBeingSacrificed = true
+                    table.insert(inscryption.sacrificing_choices, itemEnt)
+                end
+            end
 
+            if inscryption.sacrificing_choices then
+                local bloodRequired = resultItem.sacrificeRequired
+                local successfulSac = false
+                local sacT = {}
+                for i, items in pairs(inscryption.sacrificing_choices) do
+                    -- we know there must be blood, no need to check again
+                    table.insert(sacT, items)
+                    bloodRequired = bloodRequired - items.blood
+                    if bloodRequired <= 0 then
+                        successfulSac = true
+                        break
+                    end
+                end
+                if successfulSac then
+                    for i, items in pairs(sacT) do
+                        lp.forceSpawnSlot(lp.getPos(items), server.entities.player_attack_button, ent.lootplotTeam)
+                        lp.destroy(items)
+
+                    end
+                    resultItem.lootplotTeam = "sacrifice_complete"
+                end
+            end
         end
     end,
 })

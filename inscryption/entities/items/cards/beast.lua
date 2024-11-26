@@ -27,7 +27,7 @@ local function defineBeast(id, details)
             elseif lp.isSlotEntity(targetEnt) then
                 if selfEnt.lootplotTeam == inscryption.team then
                     lp.addPoints(targetEnt, -selfEnt.attack)
-                else    
+                elseif targetEnt.lootplotTeam == inscryption.team then
                     lp.addPoints(targetEnt, selfEnt.attack)
                 end
             end
