@@ -177,8 +177,14 @@ umg.defineEntityType("inscryption:doom_clock", {
 
         local newRound = round
         lp.main.setRound(ent, newRound)
-        if (newRound > numOfRounds) and (points <= 0) then
+        if (points < 0) then
             lose()
+        end
+
+        lp.addMoney(ent, -4)
+        if inscryption.state == "play" then
+            inscryption.change_state("draw_card")
+            inscryption.state = "draw_card"
         end
     end
 })

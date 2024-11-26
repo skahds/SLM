@@ -3,7 +3,7 @@ local inscryption = {
     beasts = {},
     state="map",
     
-    deck = {"stoat"}
+    deck = {"stoat", "stoat"}
 }
 
 
@@ -31,3 +31,4 @@ end
 
 
 umg.expose("inscryption", inscryption)
+

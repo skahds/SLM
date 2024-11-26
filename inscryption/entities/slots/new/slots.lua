@@ -99,7 +99,7 @@ lp.defineSlot("inscryption:draw_card", {
     onActivate = function(ent)
         local ppos = lp.getPos(ent)
         if ppos then
-            if inscryption.state == "draw_card" then
+            if inscryption.state == "draw_card" and #inscryption.playing_deck > 0 then
                 local deck = inscryption.playing_deck
                 shuffleTable(deck)
 
@@ -115,7 +115,11 @@ lp.defineSlot("inscryption:draw_card", {
 
 lp.defineSlot("inscryption:blank_wood", {
     name= "Nothing",
-    image="blank_wood"
+    image="blank_wood",
+
+    canAddItemToSlot = function(slotEnt, itemEnt)
+        return itemEnt.beast == true
+    end
 })
 
 lp.defineSlot("inscryption:empty_map", {

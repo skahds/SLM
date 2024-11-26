@@ -2,7 +2,11 @@ local midPosX = 20
 local midPosY = 20
 
 local function createBoard(plot, clientId)
-    local slotOrder = {server.entities.enemy_move_down, server.entities.enemy_attack, server.entities.player_attack, server.entities.sacrifice_button, server.entities.blank_wood}
+    local slotOrder = {server.entities.enemy_move_down, server.entities.enemy_attack, server.entities.player_attack, server.entities.sacrifice_button}
+    for i=1, math.floor(#inscryption.deck/4)+1 do
+        table.insert(slotOrder, server.entities.blank_wood)
+    end
+
     for y=1, #slotOrder do
         for x=1, 4 do
             lp.forceSpawnSlot(plot:getPPos(midPosX-1+x,midPosY-1+y), slotOrder[y], clientId)
@@ -11,7 +15,8 @@ local function createBoard(plot, clientId)
 
     lp.forceSpawnSlot(plot:getPPos(midPosX+5,midPosY), server.entities.draw_squirrel, clientId)
     lp.forceSpawnSlot(plot:getPPos(midPosX+6,midPosY), server.entities.draw_card, clientId)
-
+    lp.forceSpawnSlot(plot:getPPos(midPosX+5,midPosY-1), server.entities.blank_wood, clientId)
+    lp.forceSpawnSlot(plot:getPPos(midPosX+6,midPosY-1), server.entities.blank_wood, clientId)
 end
 
 local function createMap(plot, clientId)
