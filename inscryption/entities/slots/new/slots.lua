@@ -24,6 +24,7 @@ lp.defineSlot("inscryption:player_attack_button", {
         if ppos and itemEnt then
             if itemEnt.sacrificeRequired <= 0 or itemEnt.lootplotTeam == "sacrifice_complete" then
                 local newSlot = lp.forceSpawnSlot(ppos, server.entities.player_attack, ent.lootplotTeam)
+                itemEnt.lootplotTeam = "player"
                 lp.swapItems(lp.getPos(inscryption.play_card_slot), ppos)
             end
         end
