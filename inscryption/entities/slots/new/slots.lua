@@ -10,6 +10,24 @@ local function shuffleTable(t)
     end
 end
 
+lp.defineSlot("inscryption:player_attack_button", {
+    name= "Player Attack",
+    image="player_attack_button",
+    description = "Plays the card in the card player slot",
+
+    baseMaxActivations = 100,
+    triggers = {},
+    buttonSlot = true,
+    onActivate = function(ent)
+        local ppos = lp.getPos(ent)
+        local itemEnt = lp.slotToItem(inscryption.play_card_slot)
+        if ppos and itemEnt then
+            local newSlot = lp.forceSpawnSlot(ppos, server.entities.player_attack, ent.lootplotTeam)
+            lp.swapItems(lp.getPos(inscryption.play_card_slot), ppos)
+        end
+    end,
+})
+
 lp.defineSlot("inscryption:player_attack", {
     name= "Player Attack",
     image="player_attack",
@@ -18,6 +36,7 @@ lp.defineSlot("inscryption:player_attack", {
         return itemEnt.beast == true
     end
 })
+
 lp.defineSlot("inscryption:enemy_attack", {
     name= "Enemy Attack",
     image="enemy_attack",
@@ -32,6 +51,16 @@ lp.defineSlot("inscryption:enemy_move_down", {
 
     canAddItemToSlot = function(slotEnt, itemEnt)
         return itemEnt.lootplotTeam == inscryption.team
+    end
+})
+
+lp.defineSlot("inscryption:play_card_slot", {
+    name= "Card Player",
+    image="blank_wood",
+    baseCanSlotPropagate = false,
+
+    canAddItemToSlot = function(slotEnt, itemEnt)
+        return itemEnt.beast == true
     end
 })
 
