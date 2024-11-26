@@ -4,11 +4,19 @@ lp.defineSlot("inscryption:player_attack", {
 })
 lp.defineSlot("inscryption:enemy_attack", {
     name= "Enemy Attack",
-    image="enemy_attack"
+    image="enemy_attack",
+
+    canAddItemToSlot = function(slotEnt, itemEnt)
+        return itemEnt.lootplotTeam == inscryption.team
+    end
 })
 lp.defineSlot("inscryption:enemy_move_down", {
     name= "Enemy Queue",
-    image="enemy_move_down"
+    image="enemy_move_down",
+
+    canAddItemToSlot = function(slotEnt, itemEnt)
+        return itemEnt.lootplotTeam == inscryption.team
+    end
 })
 
 lp.defineSlot("inscryption:sacrifice_button", {
@@ -38,10 +46,10 @@ lp.defineSlot("inscryption:draw_squirrel", {
     name = "Draw Card",
     description = "Click to draw a card",
 
-    image = "sacrifice_button_up",
+    image = "draw_squirrel_up",
     activateAnimation = {
-        activate = "sacrifice_button_down",
-        idle = "sacrifice_button_up",
+        activate = "draw_squirrel_down",
+        idle = "draw_squirrel_up",
         duration = 0.25
     },
     baseMaxActivations = 100,

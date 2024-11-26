@@ -1,4 +1,5 @@
 local inscryption = {
+    team = "Leshy",
     beasts = {}
 }
 
