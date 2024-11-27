@@ -117,6 +117,16 @@ defineBeast("raven", {
     sigils = {"Airborne"}
 })
 
+defineBeast("black_goat", {
+    name = "Black Goat",
+    description = "The apotheosized Goat. The truest offering. Sacrificing it grants three blood.!",
+    attack = 0,
+    insHP = 1,
+    sacrificeRequired = 1,
+    sigils = {"Worthy Sacrifice"}
+})
+
+
 for id, card in pairs(cards) do
     lp.defineItem("inscryption:" .. id, card)
 end
