@@ -10,6 +10,7 @@ local function shuffleTable(t)
     end
 end
 
+
 lp.defineSlot("inscryption:player_attack_button", {
     name= "Player Attack",
     image="player_attack_button",
@@ -37,7 +38,7 @@ lp.defineSlot("inscryption:player_attack", {
 
     canAddItemToSlot = function(slotEnt, itemEnt)
         return itemEnt.beast == true
-    end
+    end,
 })
 
 lp.defineSlot("inscryption:enemy_attack", {
@@ -46,7 +47,7 @@ lp.defineSlot("inscryption:enemy_attack", {
 
     canAddItemToSlot = function(slotEnt, itemEnt)
         return itemEnt.lootplotTeam == inscryption.team
-    end
+    end,
 })
 lp.defineSlot("inscryption:enemy_move_down", {
     name= "Enemy Queue",
@@ -57,10 +58,22 @@ lp.defineSlot("inscryption:enemy_move_down", {
     end,
 
     onActivate = function(ent)
-        if lp.slotToItem(ent) then
-            local item = lp.slotToItem(ent)
-            if item then
-                
+        if inscryption.state == "play" then
+            -- movement
+            if lp.slotToItem(ent) then
+                local item = lp.slotToItem(ent)
+                if item then
+                    if item.shape then
+                        lp.targets.setShape(item, inscryption.targets.rotate(item.shape, 180))
+                    end
+                    if lp.posToItem(lp.getPos(item):down(1)) == nil then
+                        lp.swapItems(lp.getPos(item), lp.getPos(item):down(1))
+                        -- lp.tryTriggerEntity("PULSE", item)
+                    end
+                end
+            end
+            if math.random() > 0.5 then
+                lp.trySpawnItem(lp.getPos(ent), server.entities.stoat, inscryption.team)
             end
         end
     end
