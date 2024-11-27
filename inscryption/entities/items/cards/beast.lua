@@ -119,7 +119,7 @@ defineBeast("raven", {
 
 defineBeast("black_goat", {
     name = "Black Goat",
-    description = "The apotheosized Goat. The truest offering. Sacrificing it grants three blood.!",
+    description = "The apotheosized Goat. The truest offering. Sacrificing it grants three blood.",
     attack = 0,
     insHP = 1,
     sacrificeRequired = 1,
