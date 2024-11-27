@@ -24,7 +24,7 @@ lp.defineSlot("inscryption:player_attack_button", {
         if ppos and itemEnt then
             if itemEnt.sacrificeRequired <= 0 or itemEnt.lootplotTeam == "sacrifice_complete" then
                 local newSlot = lp.forceSpawnSlot(ppos, server.entities.player_attack, ent.lootplotTeam)
-                itemEnt.lootplotTeam = "player"
+                itemEnt.lootplotTeam = inscryption.player_team
                 lp.swapItems(lp.getPos(inscryption.play_card_slot), ppos)
             end
         end
@@ -54,6 +54,15 @@ lp.defineSlot("inscryption:enemy_move_down", {
 
     canAddItemToSlot = function(slotEnt, itemEnt)
         return itemEnt.lootplotTeam == inscryption.team
+    end,
+
+    onActivate = function(ent)
+        if lp.slotToItem(ent) then
+            local item = lp.slotToItem(ent)
+            if item then
+                
+            end
+        end
     end
 })
 

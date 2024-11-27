@@ -12,7 +12,6 @@ local function defineBeast(id, details)
     details.insHP = details.health or 1
     details.blood = details.blood or 1
     details.sacrificeRequired = details.sacrificeRequired or 0
-    details.sigils = details.sigils or {}
     details.canItemFloat = true
 
 
@@ -27,15 +26,21 @@ local function defineBeast(id, details)
             elseif lp.isSlotEntity(targetEnt) then
                 if selfEnt.lootplotTeam == inscryption.team then
                     lp.addPoints(targetEnt, -selfEnt.attack)
-                elseif selfEnt.lootplotTeam == "player" then
+                elseif selfEnt.lootplotTeam == inscryption.player_team then
                     lp.addPoints(targetEnt, selfEnt.attack)
                 end
             end
         end
     end}
 
+    local sigils = details.sigils or {}
+    for i, sigil in pairs(sigils) do
+        inscryption.giveSigilEffect(details, sigil)
+    end
+    details.sigils = details.sigils or {}
 
     cards[id] = details
+    print(#details.sigils)
     table.insert(inscryption.beasts, id)
 end
 
@@ -50,6 +55,15 @@ defineBeast("stoat", {
     attack = 1,
     health = 3,
     sacrificeRequired = 1
+})
+
+defineBeast("raven", {
+    name = "Raven",
+    description = "Fly!",
+    attack = 2,
+    health = 3,
+    sacrificeRequired = 2,
+    sigils = {"Airborne"}
 })
 
 for id, card in pairs(cards) do
