@@ -2,7 +2,7 @@ local loc = localization.localize
 local interp = localization.newInterpolator
 
 local function nextLevel(ent)
-    lp.setPoints(ent, 5)
+    lp.setPoints(ent, 0)
     lp.main.setRound(ent, 1)
     lp.setLevel(ent, lp.getLevel(ent))
 end

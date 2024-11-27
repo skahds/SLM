@@ -16,7 +16,7 @@ local loc = localization.localize
 
 ---@param levelNumber integer
 local function getRequiredPoints(levelNumber)
-    return 10
+    return 5
 end
 
 
@@ -177,7 +177,7 @@ umg.defineEntityType("inscryption:doom_clock", {
 
         local newRound = round
         lp.main.setRound(ent, newRound)
-        if (points < 0) then
+        if (points <= -5) then
             lose()
         end
 

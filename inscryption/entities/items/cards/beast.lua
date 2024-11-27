@@ -23,7 +23,7 @@ local function printCenterWithOutline(text, x, y, rot, sx, sy, oy, kx, ky)
 end
 
 
-local PRICE_TEXT = interp("%{insHP} - %{attack}")
+local PRICE_TEXT = interp("%{attack} - %{insHP}")
 local HEALTH_COLOR = objects.Color.fromByteRGBA(252, 5, 3)
 local GREEN_PRICE_COLOR = objects.Color.fromByteRGBA(100, 252, 30)
 

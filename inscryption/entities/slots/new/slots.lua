@@ -118,21 +118,33 @@ lp.defineSlot("inscryption:sacrifice_button", {
             if inscryption.sacrificing_choices then
                 local bloodRequired = resultItem.sacrificeRequired
                 local successfulSac = false
+                local semiMarked = {}
                 local sacT = {}
-                for i, items in pairs(inscryption.sacrificing_choices) do
+                for i=#inscryption.sacrificing_choices, 1, -1 do
+                    local items = inscryption.sacrificing_choices[i]
                     -- we know there must be blood, no need to check again
                     table.insert(sacT, items)
                     bloodRequired = bloodRequired - items.blood
+
+                    table.insert(semiMarked, i)
                     if bloodRequired <= 0 then
+                        for i=#semiMarked, 1, -1 do
+                            table.remove(inscryption.sacrificing_choices, i)
+                        end
+                        semiMarked = {}
                         successfulSac = true
                         break
                     end
+                    print("sac")
                 end
                 if successfulSac then
+                    print("success")
                     for i, items in pairs(sacT) do
-                        lp.forceSpawnSlot(lp.getPos(items), server.entities.player_attack_button, ent.lootplotTeam)
-                        lp.destroy(items)
+                        if lp.getPos(items) then
+                            lp.forceSpawnSlot(lp.getPos(items), server.entities.player_attack_button, ent.lootplotTeam)
+                            lp.destroy(items)
 
+                        end
                     end
                     resultItem.lootplotTeam = "sacrifice_complete"
                 end
