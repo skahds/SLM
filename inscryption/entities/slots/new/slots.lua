@@ -52,6 +52,7 @@ lp.defineSlot("inscryption:enemy_attack", {
 lp.defineSlot("inscryption:enemy_move_down", {
     name= "Enemy Queue",
     image="enemy_move_down",
+    baseCanSlotPropagate = false,
 
     canAddItemToSlot = function(slotEnt, itemEnt)
         return itemEnt.lootplotTeam == inscryption.team

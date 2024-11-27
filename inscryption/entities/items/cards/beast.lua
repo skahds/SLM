@@ -23,15 +23,23 @@ local function printCenterWithOutline(text, x, y, rot, sx, sy, oy, kx, ky)
 end
 
 
-local PRICE_TEXT = interp("%{attack} - %{insHP}")
+local ATTACK_HEALTH_TEXT = interp("%{attack} - %{insHP}")
 local HEALTH_COLOR = objects.Color.fromByteRGBA(252, 5, 3)
-local GREEN_PRICE_COLOR = objects.Color.fromByteRGBA(100, 252, 30)
+local NAME_TEXT = interp("%{name}")
+local SACRRIFICE_REQUIRED_TEXT = interp("%{name}/%{sacrificeRequired}")
+local WHITE_COLOR = objects.Color.fromByteRGBA(255, 255, 255)
 
 local function drawItemAttackHealth(itemEnt)
     if itemEnt.insHP and itemEnt.attack then
+        love.graphics.setColor(WHITE_COLOR)
+        printCenterWithOutline(ATTACK_HEALTH_TEXT(itemEnt), itemEnt.x, itemEnt.y, 0, 0.75, 0.75, -5, 0, 0)
+    end
+    if itemEnt.sacrificeRequired and itemEnt.sacrificeRequired > 0 then
         love.graphics.setColor(HEALTH_COLOR)
-
-        printCenterWithOutline(PRICE_TEXT(itemEnt), itemEnt.x, itemEnt.y, 0, 0.75, 0.75, -5, 0, 0)
+        printCenterWithOutline(SACRRIFICE_REQUIRED_TEXT(itemEnt), itemEnt.x, itemEnt.y, 0, 0.75, 0.75, 20, 0, 0)
+    else
+        love.graphics.setColor(HEALTH_COLOR)
+        printCenterWithOutline(NAME_TEXT(itemEnt), itemEnt.x, itemEnt.y, 0, 0.75, 0.75, 20, 0, 0)
     end
 end
 

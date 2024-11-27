@@ -19,6 +19,8 @@ end
 
 defineInteger("sacrificeRequired")
 defineInteger("blood")
+defineInteger("insHP")
+defineInteger("attack")
 
 
 
