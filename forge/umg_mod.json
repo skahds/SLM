@@ -1,0 +1,4 @@
+{
+    "uses": ["lootplot.s0.bundle"],
+    "type": "addon"
+}
