@@ -10,22 +10,26 @@ function slm.debugPrint(str, str2)
     print("======== END DEBUG ========")
 end
 
-umg.on("lootplot:entityReset", function()
+-- umg.on("firstactivate:playerJoin", function (clientId)
+--     local run = lp.main.getRun()
+--     if run and server then
+--         local plot = run:getPlot()
+--         local plasticTable = {
+--             server.entities.water_pump,
+--             server.entities.oil_rig,
+--             server.entities.boiler,
+--         }
+--         for x=1, 5 do
+--             for y=1,12 do
+--                 lp.forceSpawnSlot(plot:getPPos(17+x,19+y), server.entities.slot, clientId)
+--             end
+--         end
+--         for i=0, 8 do
+--             if plasticTable[i] then
+--                 lp.forceSpawnItem(plot:getPPos(18+i%3,19+math.floor(i/3)), plasticTable[i], clientId)
+--             end
+--         end
 
-    local run = lp.main.getRun()
-    if run and server then
-        local plot = run:getPlot()
-        lp.forceSpawnSlot(plot:getPPos(10,9), server.entities.shop_slot,"enemy")
-    end
-
-    -- lp.forceSpawnSlot(lp.main.getContext():getPlot():getPPos(6,9), server.entities.shop_slot,clientID)
-    -- lp.forceSpawnSlot(lp.main.getContext():getPlot():getPPos(7,9), server.entities.shop_slot,clientID)
-
-    if slm.debugMode == true then
-    -- lp.forceSpawnSlot(lp.main.getContext():getPlot():getPPos(12,12), server.entities.turn_slot,clientID)
-        lp.forceSpawnItem(lp.main.getContext():getPlot():getPPos(9,7), server.entities.torch,clientID)
-
-    end
-    
-end)
+--     end
+-- end)
 
