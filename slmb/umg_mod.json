@@ -1,0 +1,4 @@
+{
+    "uses": ["localization", "lootplot", "lootplot.backgrounds"],
+    "type": "addon"
+}
