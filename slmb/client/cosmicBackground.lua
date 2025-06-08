@@ -11,7 +11,8 @@ local function generateStars(self, rng, args)
         size = size,
         layerIndex = args.layerIndex or rng:random(5, 9)/10,
         image = args.type,
-        color = args.color
+        color = args.color,
+        colorPulses = args.colorPulses,
     }
     self.glowStars:add(star)
 end
@@ -49,7 +50,7 @@ function cosmicBackground:init(args)
     end
     
     for i=1, args.numberOfStar*5 do
-        generateStars(self, rng, {type="sparkle_32",
+        generateStars(self, rng, {type="sparkle_32", colorPulses = true,
         color={rng:random(args.starColorMin[1], 10)/10, rng:random(args.starColorMin[2], 10)/10, rng:random(args.starColorMin[3], 10)/10}})
     end
 
@@ -75,13 +76,40 @@ end
 
 local function updateStar(self, star, dt)
     if distToHorizontalEdge(self, star) < -10 then
-        star.x = self.worldX - 5
+        star.x = self.worldX+self.worldWidth + 5
     end
     if distToVerticalEdge(self, star) < -10 then
-        star.y = self.worldY - 5
+        star.y = self.worldY+self.worldHeight + 5
     end
     star.x = star.x - star.layerIndex * 10 * dt
     star.y = star.y - star.layerIndex * 10 * dt
+
+    if star.colorPulses == true then
+        local rng = love.math.newRandomGenerator(love.math.getRandomSeed())
+
+        if star.originalColor == nil then
+            star.originalColor = {}
+            for i, c in ipairs(star.color) do
+                star.originalColor[i] = c
+            end
+            star.isPulsing = true
+            star.pulseAmount = rng:random(1, 5)/10
+        end
+
+        if star.isPulsing then
+            star.pulseAmount = star.pulseAmount + rng:random(7, 10)/100*dt
+            if star.pulseAmount > 0.5 then
+                star.isPulsing = false
+            end
+        else
+            star.pulseAmount = star.pulseAmount - rng:random(7, 10)/100*dt
+            if star.pulseAmount < 0 then
+                star.isPulsing = true
+            end
+        end
+        
+        star.color = {star.originalColor[1]+star.pulseAmount/2, star.originalColor[2]+star.pulseAmount/2, star.originalColor[3]+star.pulseAmount/2}
+    end
 end
 
 
