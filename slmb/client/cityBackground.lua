@@ -118,7 +118,7 @@ local function drawBlock(self, block)
     local xDisplacement = (cx-block.x)/50 * ((block.topLayer-block.layerIndex)/3 + 1)
     local yDisplacement = (cy-block.y)/50 * ((block.topLayer-block.layerIndex)/3 + 1)
     local size = block.size*(block.topLayer-block.layerIndex+5)/3
-    rendering.drawImage(block.image, block.x-xDisplacement, block.y-yDisplacement, block.rot, size, size)
+    rendering.drawImage(block.image, block.x+xDisplacement, block.y+yDisplacement, block.rot, size, size)
 end
 
 function cityBackground:draw(opacity)

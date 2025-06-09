@@ -29,25 +29,25 @@ function heavenlyBg()
     })
 end
 
-function spikesBg()
+function forestBg()
     return cityBackground({
         worldX = -W/2 + DELTA, worldY = -H/2 + DELTA,
         worldWidth = W, worldHeight = H,
         numberOfBlock = 2000,
-        blockColor = {8, 1, 1, 10, 2, 2},
+        blockColor = {1, 6, 1, 2, 7, 2},
 
-        backgroundColor = objects.Color("#" .. "FF180303"),
+        backgroundColor = objects.Color("#" .. "FF020C01"),
     })
 end
 
-function spikes2Bg()
+function forest2Bg()
     return cityBackground({
         worldX = -W/2 + DELTA, worldY = -H/2 + DELTA,
         worldWidth = W, worldHeight = H,
         numberOfBlock = 5000,
-        blockColor = {8, 1, 1, 10, 2, 2},
+        blockColor = {1, 6, 1, 2, 7, 2},
 
-        backgroundColor = objects.Color("#" .. "FF180303"),
+        backgroundColor = objects.Color("#" .. "FF020C01"),
     })
 end
 
@@ -73,18 +73,18 @@ lp.backgrounds.registerBackground("slmb:heavenlyBackground", {
     fogColor = objects.Color("#" .. "FF180606")
 })
 
-lp.backgrounds.registerBackground("slmb:spikesBackground", {
-    name = "Spikes (DISCONTINUED)",
-    constructor = spikesBg,
+lp.backgrounds.registerBackground("slmb:forestBackground", {
+    name = "Forest",
+    constructor = forestBg,
     isUnlocked = returnTrue,
-    icon = "red_x",
-    fogColor = objects.Color("#" .. "FF120101")
+    icon = "forest_icon",
+    fogColor = objects.Color("#" .. "FF041201")
 })
 
-lp.backgrounds.registerBackground("slmb:spikes2Background", {
-    name = "Spikesssssss (DISCONTINUED) (LAGGY)",
-    constructor = spikes2Bg,
+lp.backgrounds.registerBackground("slmb:forest2Background", {
+    name = "Forest^2 (LAGGY)",
+    constructor = forest2Bg,
     isUnlocked = returnTrue,
-    icon = "red_x",
-    fogColor = objects.Color("#" .. "FF120101")
+    icon = "forest_icon2",
+    fogColor = objects.Color("#" .. "FF041201")
 })
