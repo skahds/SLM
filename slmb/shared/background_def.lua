@@ -5,6 +5,7 @@ local DELTA = (minsize * lp.constants.WORLD_SLOT_DISTANCE) / 2
 if client then
 
 local cosmicBackground = require("client.cosmicBackground")
+local cityBackground = require("client.cityBackground")
 
 function cosmicBg()
     return cosmicBackground({
@@ -28,6 +29,28 @@ function heavenlyBg()
     })
 end
 
+function spikesBg()
+    return cityBackground({
+        worldX = -W/2 + DELTA, worldY = -H/2 + DELTA,
+        worldWidth = W, worldHeight = H,
+        numberOfBlock = 2000,
+        blockColor = {8, 1, 1, 10, 2, 2},
+
+        backgroundColor = objects.Color("#" .. "FF180303"),
+    })
+end
+
+function spikes2Bg()
+    return cityBackground({
+        worldX = -W/2 + DELTA, worldY = -H/2 + DELTA,
+        worldWidth = W, worldHeight = H,
+        numberOfBlock = 5000,
+        blockColor = {8, 1, 1, 10, 2, 2},
+
+        backgroundColor = objects.Color("#" .. "FF180303"),
+    })
+end
+
 end
 
 local function returnTrue()
@@ -48,4 +71,20 @@ lp.backgrounds.registerBackground("slmb:heavenlyBackground", {
     isUnlocked = returnTrue,
     icon = "heavenly_icon",
     fogColor = objects.Color("#" .. "FF180606")
+})
+
+lp.backgrounds.registerBackground("slmb:spikesBackground", {
+    name = "Spikes (DISCONTINUED)",
+    constructor = spikesBg,
+    isUnlocked = returnTrue,
+    icon = "red_x",
+    fogColor = objects.Color("#" .. "FF120101")
+})
+
+lp.backgrounds.registerBackground("slmb:spikes2Background", {
+    name = "Spikesssssss (DISCONTINUED) (LAGGY)",
+    constructor = spikes2Bg,
+    isUnlocked = returnTrue,
+    icon = "red_x",
+    fogColor = objects.Color("#" .. "FF120101")
 })
