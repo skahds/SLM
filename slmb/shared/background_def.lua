@@ -33,7 +33,7 @@ function forestBg()
     return cityBackground({
         worldX = -W/2 + DELTA, worldY = -H/2 + DELTA,
         worldWidth = W, worldHeight = H,
-        numberOfBlock = 2000,
+        numberOfBlock = 300,
         blockColor = {1, 6, 1, 2, 7, 2},
 
         backgroundColor = objects.Color("#" .. "FF020C01"),
@@ -44,7 +44,7 @@ function forest2Bg()
     return cityBackground({
         worldX = -W/2 + DELTA, worldY = -H/2 + DELTA,
         worldWidth = W, worldHeight = H,
-        numberOfBlock = 5000,
+        numberOfBlock = 700,
         blockColor = {1, 6, 1, 2, 7, 2},
 
         backgroundColor = objects.Color("#" .. "FF020C01"),
@@ -82,7 +82,7 @@ lp.backgrounds.registerBackground("slmb:forestBackground", {
 })
 
 lp.backgrounds.registerBackground("slmb:forest2Background", {
-    name = "Forest^2 (LAGGY)",
+    name = "Forest^2",
     constructor = forest2Bg,
     isUnlocked = returnTrue,
     icon = "forest_icon2",
