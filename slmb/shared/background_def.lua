@@ -2,7 +2,7 @@ local W,H = 3000,1500
 local minsize = 40
 local DELTA = (minsize * lp.constants.WORLD_SLOT_DISTANCE) / 2
 
-local forestBg, forest2Bg, shapesBg
+local forestBg, forest2Bg, shapesBg, catBg, redSpaceBg
 
 if client then
 
@@ -78,7 +78,8 @@ function shapesBg()
     return framworkBackground({
         worldX = -W/2 + DELTA, worldY = -H/2 + DELTA,
         worldWidth = W, worldHeight = H,
-        objectMovement = {10, -10},
+        objectMovement = {5, -5},
+        objectRotation = 0.05,
 
 
         load = function (self, generateObject)
@@ -92,6 +93,53 @@ function shapesBg()
         end,
 
         backgroundColor = objects.Color("#" .. "FF212121"),
+    })
+end
+
+function catBg()
+    local numberOfShape = 300
+    return framworkBackground({
+        worldX = -W/2 + DELTA, worldY = -H/2 + DELTA,
+        worldWidth = W, worldHeight = H,
+        objectMovement = {5, -5},
+        objectRotation = 0.05,
+
+
+        load = function (self, generateObject)
+            local rng = love.math.newRandomGenerator(love.math.getRandomSeed())
+
+            local images = {"copycat", "dangerously_funny_cat", "chubby_cat",
+            "copykitten", "midas_cat", "pink_cat", "crappy_cat", "evil_cat"}
+            for i=1, numberOfShape*2 do
+                generateObject(self, rng, {type=chooseRandom(rng, images), size=rng:random()+1,
+                color={1, 1, 1}})
+            end
+        end,
+
+        backgroundColor = objects.Color("#" .. "FF8ECDD8"),
+    })
+end
+
+function redSpaceBg()
+    local numberOfShape = 200
+    return framworkBackground({
+        worldX = -W/2 + DELTA, worldY = -H/2 + DELTA,
+        worldWidth = W, worldHeight = H,
+        objectMovement = {5, -5},
+        objectRotation = 0.05,
+
+
+        load = function (self, generateObject)
+            local rng = love.math.newRandomGenerator(love.math.getRandomSeed())
+
+            local images = {"hand1", "hand2", "hand3", "hand4", "hand5"}
+            for i=1, numberOfShape do
+                generateObject(self, rng, {type=chooseRandom(rng, images), size=(rng:random()+1),
+                color={1, 0, 0}})
+            end
+        end,
+
+        backgroundColor = objects.Color("#" .. "FF360B0B"),
     })
 end
 
@@ -134,9 +182,25 @@ lp.backgrounds.registerBackground("slmb:forest2Background", {
 })
 
 lp.backgrounds.registerBackground("slmb:shapesBackground", {
-    name = "Shapes Background",
+    name = "Shapes -skahd",
     constructor = shapesBg,
     isUnlocked = returnTrue,
     icon = "shapes_icon",
     fogColor = objects.Color("#" .. "FF1E1E1E")
+})
+
+lp.backgrounds.registerBackground("slmb:catBackground", {
+    name = "Cat -skahd",
+    constructor = catBg,
+    isUnlocked = returnTrue,
+    icon = "copycat",
+    fogColor = objects.Color("#" .. "FF407EB4")
+})
+
+lp.backgrounds.registerBackground("slmb:redSpaceBackground", {
+    name = "Red Space -skahd",
+    constructor = redSpaceBg,
+    isUnlocked = returnTrue,
+    icon = "red_x",
+    fogColor = objects.Color("#" .. "FF2A0909")
 })

@@ -12,6 +12,7 @@ local function generateObject(self, rng, args)
         layerIndex = args.layerIndex or rng:random(5, 9)/10,
         image = args.type,
         color = args.color,
+        rotationUpdate = args.rotationUpdate or self.objectRotation
     }
     self.objects:add(object)
 end
@@ -72,6 +73,10 @@ local function updateObject(self, object, dt)
     object.x = object.x + object.layerIndex * self.objectMovement[1] * dt
     object.y = object.y + object.layerIndex * self.objectMovement[2] * dt
 
+
+    if self.objectRotation then
+        object.rot = object.rot + object.rotationUpdate * dt
+    end
 end
 
 
