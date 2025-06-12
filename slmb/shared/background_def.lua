@@ -2,7 +2,7 @@ local W,H = 3000,1500
 local minsize = 40
 local DELTA = (minsize * lp.constants.WORLD_SLOT_DISTANCE) / 2
 
-local forestBg, forest2Bg, shapesBg, catBg, redSpaceBg
+local forestBg, forest2Bg, shapesBg, catBg, redSpaceBg, paradiseBg
 
 if client then
 
@@ -143,6 +143,35 @@ function redSpaceBg()
     })
 end
 
+function paradiseBg()
+    local numberOfShape = 200
+    return framworkBackground({
+        worldX = -W/2 + DELTA, worldY = -H/2 + DELTA,
+        worldWidth = W, worldHeight = H,
+        objectMovement = {5, -5},
+        objectRotation = 0.05,
+
+
+        load = function (self, generateObject)
+            local rng = love.math.newRandomGenerator(love.math.getRandomSeed())
+
+            local images = {"hand1", "hand2", "hand3", "hand4", "hand5"}
+            for i=1, numberOfShape do
+                generateObject(self, rng, {type=chooseRandom(rng, images), size=(rng:random()+1)/5,
+                color={1, 1, 1}})
+            end
+
+            local images2 = {"cloud1", "cloud2", "cloud3"}
+            for i=1, numberOfShape do
+                generateObject(self, rng, {type=chooseRandom(rng, images2), size=(rng:random()+1)/2,
+                color={1, 1, 1}, rotationUpdate = 0, rot=0})
+            end
+        end,
+
+        backgroundColor = objects.Color("#" .. "FFD7EBF0"),
+    })
+end
+
 end
 
 local function returnTrue()
@@ -203,4 +232,12 @@ lp.backgrounds.registerBackground("slmb:redSpaceBackground", {
     isUnlocked = returnTrue,
     icon = "red_x",
     fogColor = objects.Color("#" .. "FF2A0909")
+})
+
+lp.backgrounds.registerBackground("slmb:paradiseBackground", {
+    name = "Paradise -skahd",
+    constructor = paradiseBg,
+    isUnlocked = returnTrue,
+    icon = "red_x",
+    fogColor = objects.Color("#" .. "FF2D2D2D")
 })
