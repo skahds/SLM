@@ -74,7 +74,7 @@ function shapesBg()
     end
     
 
-    local numberOfShape = 300
+    local numberOfShape = 100
     return framworkBackground({
         worldX = -W/2 + DELTA, worldY = -H/2 + DELTA,
         worldWidth = W, worldHeight = H,
@@ -121,7 +121,7 @@ function catBg()
 end
 
 function redSpaceBg()
-    local numberOfShape = 200
+    local numberOfShape = 400
     return framworkBackground({
         worldX = -W/2 + DELTA, worldY = -H/2 + DELTA,
         worldWidth = W, worldHeight = H,
@@ -134,7 +134,7 @@ function redSpaceBg()
 
             local images = {"hand1", "hand2", "hand3", "hand4", "hand5"}
             for i=1, numberOfShape do
-                generateObject(self, rng, {type=chooseRandom(rng, images), size=(rng:random()+1),
+                generateObject(self, rng, {type=chooseRandom(rng, images), size=(rng:random()+1)/5,
                 color={1, 0, 0}})
             end
         end,
