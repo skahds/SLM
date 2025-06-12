@@ -2,10 +2,13 @@ local W,H = 3000,1500
 local minsize = 40
 local DELTA = (minsize * lp.constants.WORLD_SLOT_DISTANCE) / 2
 
+local forestBg, forest2Bg, shapesBg
+
 if client then
 
 local cosmicBackground = require("client.cosmicBackground")
 local cityBackground = require("client.cityBackground")
+local framworkBackground = require("client.frameworkBackground")
 
 function cosmicBg()
     return cosmicBackground({
@@ -51,6 +54,47 @@ function forest2Bg()
     })
 end
 
+-- BELOW THIS ARE BACKGROUNDS THAT USES THE BACKGROUND FRAMEWORK
+local function chooseRandom(rng, t)
+    local num = rng:random() * (#t-1)
+    return t[math.floor(num+0.5)+1]
+end
+
+
+function shapesBg()
+    local getShapeColor = function (rng)
+        local num = rng:random()
+        if num > 2/3 then
+            return {1, 0.7, 0.7}
+        elseif num > 1/3 then
+            return {0.7, 0.7, 1}
+        else
+            return {1, 1, 1}
+        end
+    end
+    
+
+    local numberOfShape = 300
+    return framworkBackground({
+        worldX = -W/2 + DELTA, worldY = -H/2 + DELTA,
+        worldWidth = W, worldHeight = H,
+        objectMovement = {10, -10},
+
+
+        load = function (self, generateObject)
+            local rng = love.math.newRandomGenerator(love.math.getRandomSeed())
+
+            local images = {"box_o", "box_x", "box", "cross", "box_select", "triangle_1x2", "triangle2_1x2"}
+            for i=1, numberOfShape*5 do
+                generateObject(self, rng, {type=chooseRandom(rng, images),
+                color=getShapeColor(rng)})
+            end
+        end,
+
+        backgroundColor = objects.Color("#" .. "FF212121"),
+    })
+end
+
 end
 
 local function returnTrue()
@@ -87,4 +131,12 @@ lp.backgrounds.registerBackground("slmb:forest2Background", {
     isUnlocked = returnTrue,
     icon = "forest_icon2",
     fogColor = objects.Color("#" .. "FF041201")
+})
+
+lp.backgrounds.registerBackground("slmb:shapesBackground", {
+    name = "Shapes Background",
+    constructor = shapesBg,
+    isUnlocked = returnTrue,
+    icon = "shapes_icon",
+    fogColor = objects.Color("#" .. "FF1E1E1E")
 })
