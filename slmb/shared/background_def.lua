@@ -8,7 +8,7 @@ if client then
 
 local cosmicBackground = require("client.cosmicBackground")
 local cityBackground = require("client.cityBackground")
-local framworkBackground = require("client.frameworkBackground")
+local frameworkBackground = require("client.frameworkBackground")
 
 function cosmicBg()
     return cosmicBackground({
@@ -75,7 +75,7 @@ function shapesBg()
     
 
     local numberOfShape = 100
-    return framworkBackground({
+    return frameworkBackground({
         worldX = -W/2 + DELTA, worldY = -H/2 + DELTA,
         worldWidth = W, worldHeight = H,
         objectMovement = {5, -5},
@@ -98,7 +98,7 @@ end
 
 function catBg()
     local numberOfShape = 300
-    return framworkBackground({
+    return frameworkBackground({
         worldX = -W/2 + DELTA, worldY = -H/2 + DELTA,
         worldWidth = W, worldHeight = H,
         objectMovement = {5, -5},
@@ -117,12 +117,13 @@ function catBg()
         end,
 
         backgroundColor = objects.Color("#" .. "FF8ECDD8"),
+        backgroundDim = 0.5,
     })
 end
 
 function redSpaceBg()
     local numberOfShape = 400
-    return framworkBackground({
+    return frameworkBackground({
         worldX = -W/2 + DELTA, worldY = -H/2 + DELTA,
         worldWidth = W, worldHeight = H,
         objectMovement = {5, -5},
@@ -145,7 +146,7 @@ end
 
 function paradiseBg()
     local numberOfShape = 200
-    return framworkBackground({
+    return frameworkBackground({
         worldX = -W/2 + DELTA, worldY = -H/2 + DELTA,
         worldWidth = W, worldHeight = H,
         objectMovement = {5, -5},

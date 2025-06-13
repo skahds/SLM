@@ -21,6 +21,7 @@ function frameworkBackground:init(args)
     self.objects = objects.Array()
 
     self.backgroundColor = args.backgroundColor
+    self.backgroundDim = args.backgroundDim or 0
     self.worldX = args.worldX
     self.worldY = args.worldY
     self.worldWidth = args.worldWidth
@@ -110,6 +111,9 @@ function frameworkBackground:draw(opacity)
     for _, object in ipairs(self.objects) do
         drawObject(self, object)
     end
+    --background dim
+    love.graphics.setColor(self.backgroundColor[1], self.backgroundColor[2], self.backgroundColor[3], self.backgroundDim)
+    love.graphics.rectangle("fill", self.worldX, self.worldY, self.worldWidth, self.worldHeight)
 end
 
 return frameworkBackground
